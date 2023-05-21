@@ -1,0 +1,26 @@
+version: '3.8'
+
+x-var: &COMMON
+  networks:
+    internal:
+
+networks:
+  internal:
+
+services:
+  gas:
+    <<: *COMMON
+    build: ../../build
+    image: gas:1
+    container_name: gas-$PROJECT
+    hostname: gas-$PROJECT
+    volumes:
+      - ../..:/app
+    working_dir: /app
+    environment:
+      PATH: /app/node_modules/.bin:$PATH
+      PROJECT: $PROJECT
+    command:
+      - tail
+      - -f
+      - /dev/null
