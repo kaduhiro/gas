@@ -36,6 +36,16 @@ watch:
 .PHONY: login create pull push watch
 
 # --------------------------------------------------
+# node
+# --------------------------------------------------
+src/%.ts:
+	$(MAKE) ts-node/$@
+ts-node/%:
+	$(DOCKER_COMPOSE) exec $(SERVICE) ts-node -r tsconfig-paths/register $*
+
+.PHONY: src/%.ts ts-node/%
+
+# --------------------------------------------------
 # docker
 # --------------------------------------------------
 build: build/$(SERVICE)
