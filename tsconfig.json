@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "lib": ["ES2020"],
-    "module": "ES2020",
+    "module": "CommonJS",
     "moduleResolution": "Node",
     "newLine": "lf",
     "noImplicitAny": true,
