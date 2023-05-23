@@ -1,10 +1,10 @@
 {
   "scripts": {
     "login": "clasp login",
-    "create": "clasp create --type standalone --rootDir ./src --title $PROJECT",
-    "open": "clasp open",
-    "pull": "clasp pull",
-    "push": "clasp push"
+    "create": "clasp create --auth ./.clasprc.json --type standalone --rootDir ./src --title $PROJECT",
+    "open": "clasp open --auth ./.clasprc.json",
+    "pull": "clasp pull --auth ./.clasprc.json",
+    "push": "clasp push --auth ./.clasprc.json"
   },
   "keywords": [],
   "author": "",

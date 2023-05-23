@@ -24,6 +24,7 @@ login:
 	fi
 	.success 'request succeeded. waiting for completion.'
 	wait $$pid
+	$(DOCKER_COMPOSE) exec $(SERVICE) sh -c "mv ~/.clasprc.json ."
 create:
 	$(DOCKER_COMPOSE) exec $(SERVICE) sh -c "yarn run create && mv ./src/.clasp.json ."
 pull:
