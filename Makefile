@@ -32,7 +32,7 @@ pull:
 push:
 	$(DOCKER_COMPOSE) exec $(SERVICE) yarn run push
 watch:
-	$(DOCKER_COMPOSE) exec $(SERVICE) yarn run push --watch
+	$(DOCKER_COMPOSE) exec $(SERVICE) yarn run watch
 
 .PHONY: login create pull push watch
 

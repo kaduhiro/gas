@@ -4,7 +4,8 @@
     "create": "clasp create --auth ./.clasprc.json --type standalone --rootDir ./src --title $PROJECT",
     "open": "clasp open --auth ./.clasprc.json",
     "pull": "clasp pull --auth ./.clasprc.json",
-    "push": "clasp push --auth ./.clasprc.json"
+    "push": "clasp push --auth ./.clasprc.json",
+    "watch": "clasp push --auth ./.clasprc.json --watch"
   },
   "keywords": [],
   "author": "",
