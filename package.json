@@ -1,4 +1,8 @@
 {
+  "name": "gas",
+  "description": "gas",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "login": "clasp login",
     "create": "clasp create --auth ./.clasprc.json --type standalone --rootDir ./src --title $PROJECT",
