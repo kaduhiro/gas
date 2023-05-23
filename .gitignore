@@ -1,4 +1,6 @@
 .env.local
+.clasp.json
+.clasprc.json
 
 node_modules
 yarn-error.log
