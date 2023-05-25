@@ -42,7 +42,7 @@ watch:
 src/%.ts:
 	$(MAKE) ts-node/$@
 ts-node/%:
-	$(DOCKER_COMPOSE) exec $(SERVICE) ts-node -r tsconfig-paths/register --files $*
+	$(DOCKER_COMPOSE) exec $(SERVICE) sh -c 'dotenv -e .env.local -- ts-node -r tsconfig-paths/register --files $*'
 
 .PHONY: src/%.ts ts-node/%
 
