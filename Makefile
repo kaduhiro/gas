@@ -3,6 +3,8 @@
 include .env.local
 include .env
 
+DOCKER_COMPOSE := docker-compose -f deployments/$(ENVIRONMENT)/docker-compose.yml --env-file .env.local
+
 # --------------------------------------------------
 # clasp
 # --------------------------------------------------
