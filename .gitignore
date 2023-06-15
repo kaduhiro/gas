@@ -3,8 +3,9 @@
 .clasprc.json
 
 node_modules
+
+src/modules/**
+
 yarn-error.log
 
-src/**
-!src/appsscript.json
-
+!.gitkeep
