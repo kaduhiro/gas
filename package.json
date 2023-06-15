@@ -9,7 +9,9 @@
     "open": "clasp open --auth ./.clasprc.json",
     "pull": "clasp pull --auth ./.clasprc.json",
     "push": "clasp push --auth ./.clasprc.json",
-    "watch": "clasp push --auth ./.clasprc.json --watch"
+    "watch": "clasp push --auth ./.clasprc.json --watch",
+    "deployments": "clasp deployments --auth ./.clasprc.json",
+    "deploy": "clasp deploy --auth ./.clasprc.json --deploymentId $(clasp deployments --auth ./.clasprc.json | awk '/- [0-9a-zA-Z-_]+ @[0-9]+/ { print $2; }')"
   },
   "keywords": [],
   "author": "",

@@ -35,8 +35,12 @@ push:
 	$(DOCKER_COMPOSE) exec $(SERVICE) yarn run push
 watch:
 	$(DOCKER_COMPOSE) exec $(SERVICE) yarn run watch
+deployments:
+	$(DOCKER_COMPOSE) exec $(SERVICE) yarn run deployments
+deploy:
+	$(DOCKER_COMPOSE) exec $(SERVICE) yarn run deploy
 
-.PHONY: login create pull push watch
+.PHONY: login create pull push watch deployments deploy
 
 # --------------------------------------------------
 # node
