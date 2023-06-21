@@ -11,7 +11,7 @@
     "push": "clasp push --auth ./.clasprc.json",
     "watch": "clasp push --auth ./.clasprc.json --watch",
     "deployments": "clasp deployments --auth ./.clasprc.json",
-    "deploy": "clasp deploy --auth ./.clasprc.json --deploymentId $(clasp deployments --auth ./.clasprc.json | awk '/- [0-9a-zA-Z-_]+ @[0-9]+/ { print $2; }')"
+    "deploy": "yarn run deployments | awk '/- [0-9a-zA-Z-_]+ @[0-9]+/ { option = \"--deploymentId \" $2; } END { printf(\"clasp deploy --auth ./.clasprc.json %s\\n\", option); }' | sh"
   },
   "keywords": [],
   "author": "",
