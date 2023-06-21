@@ -6,6 +6,17 @@ include .env
 DOCKER_COMPOSE := docker-compose -f deployments/$(ENVIRONMENT)/docker-compose.yml --env-file .env.local
 
 # --------------------------------------------------
+# init
+# --------------------------------------------------
+init:
+	$(MAKE) up
+	$(DOCKER_COMPOSE) exec -T $(SERVICE) yarn
+	$(MAKE) login
+	$(MAKE) create
+
+.PHONY: init
+
+# --------------------------------------------------
 # clasp
 # --------------------------------------------------
 login:
