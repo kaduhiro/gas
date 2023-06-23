@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import fetch, { RequestInit } from 'node-fetch';
 
 let _options: GoogleAppsScript.URL_Fetch.URLFetchRequestOptions = {};
 
@@ -22,7 +22,12 @@ const _fetch = async (url: string, options?: GoogleAppsScript.URL_Fetch.URLFetch
 };
 
 const _nodeFetch = async (url: string, options?: GoogleAppsScript.URL_Fetch.URLFetchRequestOptions) => {
-  const res = await fetch(url, options);
+  const init: RequestInit = { ...options };
+  if (options?.payload) {
+    init.body = JSON.stringify(options.payload);
+  }
+
+  const res = await fetch(url, init);
   if (!res.ok) {
     Promise.reject(new Error(`fetch '${url}' failed.`));
   }
