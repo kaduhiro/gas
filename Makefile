@@ -5,21 +5,23 @@ include .env
 
 DOCKER_COMPOSE := docker-compose -f deployments/$(ENVIRONMENT)/docker-compose.yml --env-file .env.local
 
-# --------------------------------------------------
-# init
-# --------------------------------------------------
-init:
+# ==================================================
+# .TARGET: general
+# ==================================================
+.PHONY: init
+
+init: # initialize project
 	$(MAKE) up
 	$(DOCKER_COMPOSE) exec -T $(SERVICE) yarn
 	$(MAKE) login
 	$(MAKE) create
 
-.PHONY: init
+# ==================================================
+# .TARGET: clasp
+# ==================================================
+.PHONY: login create pull push watch deployments deploy
 
-# --------------------------------------------------
-# clasp
-# --------------------------------------------------
-login:
+login: # log in to script.google.com
 	$(DOCKER_COMPOSE) exec -T $(SERVICE) yarn run login &
 	pid=$$(echo $$!)
 	echo -------------------------BEGIN-------------------------
@@ -38,34 +40,34 @@ login:
 	.success 'request succeeded. waiting for completion.'
 	wait $$pid
 	$(DOCKER_COMPOSE) exec $(SERVICE) sh -c "mv ~/.clasprc.json ."
-create:
+create: # create a script
 	$(DOCKER_COMPOSE) exec $(SERVICE) sh -c "yarn run create && mv ./src/.clasp.json ."
-pull:
+pull: # fetch a remote project
 	$(DOCKER_COMPOSE) exec $(SERVICE) yarn run pull
-push:
+push: # update the remote project
 	$(DOCKER_COMPOSE) exec $(SERVICE) yarn run push
-watch:
+watch: # update the remote project whenever files change
 	$(DOCKER_COMPOSE) exec $(SERVICE) yarn run watch
-deployments:
+deployments: # list deployment ids of a script
 	$(DOCKER_COMPOSE) exec $(SERVICE) yarn run deployments
-deploy:
+deploy: # deploy a project
 	$(DOCKER_COMPOSE) exec $(SERVICE) yarn run deploy
 
-.PHONY: login create pull push watch deployments deploy
+# ==================================================
+# .TARGET: node
+# ==================================================
+.PHONY: src/%.ts ts-node/%
 
-# --------------------------------------------------
-# node
-# --------------------------------------------------
-src/%.ts:
+src/%.ts: # compile and execute
 	$(MAKE) ts-node/$@
 ts-node/%:
 	$(DOCKER_COMPOSE) exec $(SERVICE) sh -c 'dotenv -e .env.local -- ts-node -r tsconfig-paths/register --files $*'
 
-.PHONY: src/%.ts ts-node/%
+# ==================================================
+# .TARGET: docker
+# ==================================================
+.PHONY: build build/% run run/% up up/% exec exec/% down down/% logs log log/%
 
-# --------------------------------------------------
-# docker
-# --------------------------------------------------
 build: build/$(SERVICE)
 build/%: # build or rebuild a image
 	$(DOCKER_COMPOSE) build $*
@@ -95,7 +97,10 @@ log: log/$(SERVICE)
 log/%: # view output from a container
 	$(DOCKER_COMPOSE) logs -f $*
 
-.PHONY: build build/% run run/% up up/% exec exec/% down down/% logs log log/%
+# ==================================================
+# .TARGET: other
+# ==================================================
+.PHONY: help clean
 
 help: # list available targets and some
 	@len=$$(awk -F':' 'BEGIN {m = 0;} /^[^\s]+:/ {gsub(/%/, "<service>", $$1); l = length($$1); if(l > m) m = l;} END {print m;}' $(MAKEFILE_LIST)) && \
@@ -109,6 +114,3 @@ help: # list available targets and some
 		"$$(awk -F':' '/^\S+:/ {gsub(/%/, "<service>", $$1); gsub(/^[^#]+/, "", $$2); gsub(/^[# ]+/, "", $$2); if ($$2) printf "  \033[1m%-'$$len's\033[0m  %s\n", $$1, $$2;}' $(MAKEFILE_LIST))"
 
 clean: # remove cache files from the working directory
-
-.PHONY: help clean
-
