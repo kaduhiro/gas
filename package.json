@@ -20,6 +20,8 @@
     "@google/clasp": "^2.4.2"
   },
   "devDependencies": {
+    "@slack/types": "^2.8.0",
+    "@slack/web-api": "^6.8.1",
     "@types/google-apps-script": "^1.0.59",
     "@types/google-apps-script-oauth2": "^38.0.0",
     "@types/node": "^18.15.11",
