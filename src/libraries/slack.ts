@@ -10,7 +10,7 @@ const _generateOptions = async (option: SlackAPIOption) => {
   const options: GoogleAppsScript.URL_Fetch.URLFetchRequestOptions = {
     method: 'get',
     headers: {
-      'content-type': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
       Authorization: `Bearer ${token}`,
     },
   };
