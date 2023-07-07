@@ -70,9 +70,9 @@ const _generateOptions = async (option: SlackAPIOption) => {
       });
 
       options.method = 'post';
-      options.payload = Object.keys(attachment).length
-        ? { channel, attachments: [{ ...attachment, text }] }
-        : { channel, text };
+      options.payload = JSON.stringify(
+        Object.keys(attachment).length ? { channel, attachments: [{ ...attachment, text }] } : { channel, text }
+      );
     }
   }
 
