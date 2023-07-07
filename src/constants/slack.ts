@@ -5,5 +5,7 @@ export namespace SLACK {
   export const  TABLE = 'slack';
   export const  USERS_KEY = 'users';
 
+  export const CACHE_EXPIRE_MINUTES_USERS_LIST = 60;
+
   export const API_URL = 'https://slack.com/api';
 }

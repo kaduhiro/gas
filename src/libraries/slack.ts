@@ -84,7 +84,7 @@ const _usersList = async () => {
 
   const cache = Kvs.get(SLACK.USERS_KEY, SLACK.TABLE);
   const cacheCreated = new Date(cache?.created);
-  if (cacheCreated && new Date().getTime() - cacheCreated.getTime() < 5 * 60 * 1000) {
+  if (cacheCreated && new Date().getTime() - cacheCreated.getTime() < SLACK.CACHE_EXPIRE_MINUTES_USERS_LIST * 60 * 1000) {
     return cache.members;
   }
 
