@@ -1,6 +1,6 @@
 import { LINE } from '#/constants/line';
 import { Kvs } from '#/libraries/kvs';
-import { Url } from '#//libraries/url';
+import { Url } from '#/libraries/url';
 
 const _generateOptions = (args: Partial<{ [key: string]: string }>) => {
   const { to, replyToken, message } = args;
