@@ -111,7 +111,6 @@ const _usersList = async () => {
   }
 
   const members: Member[] = responseJson.members ?? [];
-  console.log(`request Slack API '${url}'`);
 
   Kvs.set(SLACK.USERS_KEY, { members, created: new Date() }, SLACK.TABLE);
 
